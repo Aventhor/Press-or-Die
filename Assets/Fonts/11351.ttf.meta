@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 03f17d9f9f22fe94097d512e0a536694
+timeCreated: 1519073929
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Hector Modern
+  fontNames:
+  - Hector Modern
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a49d4f46c7eb22f45b1fa7e77a427901, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

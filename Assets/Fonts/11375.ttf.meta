@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d6f8db8c81125214fb8422b6c892ce39
+timeCreated: 1519205669
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Clematis Modern
+  fontNames:
+  - Clematis Modern
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

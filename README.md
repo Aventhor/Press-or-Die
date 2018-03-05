@@ -1,2 +1,2 @@
-# Press-or-Die
+# Press or Die
 Unity3D

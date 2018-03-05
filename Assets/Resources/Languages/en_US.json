@@ -1,0 +1,26 @@
+{
+"loc_menu": [
+"Press to play",
+"Level",
+"Current Exp",
+"Your record"
+],
+"loc_shop": [
+"Close",
+"Buy",
+"Price",
+"Not enough fragments!",
+"Watch the video and get the fragments on the balance",
+"Look",
+"You received",
+"Accept"
+],
+"loc_main": [
+"Score",
+"Your result",
+"Retry",
+"Exit",
+"Shop",
+"New record!"
+]
+}
