@@ -9,27 +9,29 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] private LangSystem ls;
     [SerializeField] private GameObject buy_window;
+    [SerializeField] private Text confirm;
     [SerializeField] private Toggle bg_button;
     [SerializeField] private Toggle platf_button;
     [SerializeField] private Toggle skins_button;
     [SerializeField] private GameObject bg_list;
     [SerializeField] private GameObject platforms_list;
     [SerializeField] private GameObject skins_list;
-    [SerializeField] private Text[] price_text = new Text[20];
     [SerializeField] private Text[] value_text_bg = new Text[11];
-    [SerializeField] private Text[] value_text_pl = new Text[3];
+    [SerializeField] private Text[] value_text_pl = new Text[6];
     [SerializeField] private Text[] value_text_sk = new Text[8];
     [SerializeField] private GameObject[] price_line_bgs = new GameObject[10];
-    [SerializeField] private GameObject[] price_line_pts = new GameObject[3];
+    [SerializeField] private GameObject[] price_line_pts = new GameObject[6];
     [SerializeField] private GameObject[] price_line_sk = new GameObject[8];
     [SerializeField] private Image bg_image;
     [SerializeField] private GameObject notification_board;
     [SerializeField] private Text error_text;
+    [SerializeField] private Text price_info;
+    [SerializeField] private Image preview;
 
 
     [SerializeField] private GameObject[] ActiveLinesBG = new GameObject[8];
-    [SerializeField] private GameObject[] ActiveLinesPL = new GameObject[3];
-    [SerializeField] private GameObject[] ActiveLineSK = new GameObject[8];
+    [SerializeField] private GameObject[] ActiveLinesPL = new GameObject[6];
+    [SerializeField] private GameObject[] ActiveLinesSK = new GameObject[8];
     ItemList itm = new ItemList();
     BalanceSystem bs = new BalanceSystem();
     private bool isActive_window;
@@ -37,14 +39,13 @@ public class Shop : MonoBehaviour
 
     void Awake()
     {
-        GameObject but1 = buy_window.transform.Find("Close Button").gameObject;
+        GameObject win = buy_window.transform.Find("Item Info Board").gameObject;
+        GameObject but1 = win.transform.Find("Close Button").gameObject;
         but1.GetComponentInChildren<Text>().text = LangSystem.lng.loc_shop[0];
-        GameObject but2 = buy_window.transform.Find("Buy Item Button").gameObject;
+        GameObject but2 = win.transform.Find("Buy Item Button").gameObject;
         but2.GetComponentInChildren<Text>().text = LangSystem.lng.loc_shop[1];
-        for (int i = 0; i < price_text.Length; i++) {
-            price_text[i].text = LangSystem.lng.loc_shop[2] + ":";
-        }
         error_text.text = LangSystem.lng.loc_shop[3];
+        confirm.text = LangSystem.lng.loc_shop[8];
     }
     void Start()
     {
@@ -58,6 +59,7 @@ public class Shop : MonoBehaviour
     }
     public void BGItems()
     {
+        CloseItemWindow();
         GetComponent<AudioSource>().Play();
         bg_button.GetComponent<Image>().color = new Color32(255, 140, 32, 255);
         platf_button.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -68,6 +70,7 @@ public class Shop : MonoBehaviour
     }
     public void PlatformsItems()
     {
+        CloseItemWindow();
         GetComponent<AudioSource>().Play();
         platf_button.GetComponent<Image>().color = new Color32(255, 140, 32, 255);
         bg_button.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -78,6 +81,7 @@ public class Shop : MonoBehaviour
     }
     public void SkinsItems ()
     {
+        CloseItemWindow();
         GetComponent<AudioSource>().Play();
         skins_button.GetComponent<Image>().color = new Color32(255, 140, 32, 255);
         bg_button.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
@@ -96,6 +100,8 @@ public class Shop : MonoBehaviour
         if (!isActive_window)
         {
             temp = id;
+            CheckPrice(temp);
+            CheckSprite(temp);
             buy_window.GetComponent<Animation>().Play("Up");
             isActive_window = !isActive_window;
         }
@@ -104,6 +110,68 @@ public class Shop : MonoBehaviour
     {
         id = temp;
         ConfirmPurchase(id);
+    }
+    public void CheckPrice(int temp)
+    {
+        if (bg_list.activeSelf)
+        {
+            for(int a = 0; a < itm.bgs_prices.Length; a++) {
+                if (temp.Equals(a))
+                    price_info.text = itm.bgs_prices[a].ToString();
+            }
+        }
+        if (platforms_list.activeSelf)
+        {
+            for (int a = 0; a < itm.platforms_prices.Length; a++)
+            {
+                if (temp.Equals(a))
+                    price_info.text = itm.platforms_prices[a].ToString();
+            }
+        }
+        if(skins_list.activeSelf)
+        {
+            for (int a = 0; a < itm.skins_prices.Length; a++)
+            {
+                if (temp.Equals(a))
+                    price_info.text = itm.skins_prices[a].ToString();
+            }
+        }
+    }
+    public void CheckSprite(int index)
+    {
+        if (bg_list.activeSelf)
+        {
+            for (int a = 0; a < itm.bgs_list.Length; a++)
+            {
+                if (index.Equals(a))
+                {
+                    preview.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 600);
+                    preview.overrideSprite = Resources.Load("Sprites/bg_" + a, typeof(Sprite)) as Sprite;
+                }
+            }
+        }
+        if (platforms_list.activeSelf)
+        {
+            for (int a = 0; a < itm.platforms_list.Length; a++)
+            {
+                if (index.Equals(a))
+                {
+                    preview.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 200);
+                    preview.overrideSprite = Resources.Load("Sprites/platform_" + a, typeof(Sprite)) as Sprite;
+                }
+            }
+        }
+        if (skins_list.activeSelf)
+        {
+            for (int a = 0; a < itm.skins_list.Length; a++)
+            {
+                if (index.Equals(a))
+                {
+                    preview.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 300);
+                    preview.overrideSprite = Resources.Load("Sprites/skin_" + a, typeof(Sprite)) as Sprite;
+                }
+            }
+        }
     }
     public void ConfirmPurchase(int price_index)
     {
@@ -160,9 +228,12 @@ public class Shop : MonoBehaviour
     }
     public void CloseItemWindow()
     {
-        buy_window.GetComponent<Animation>().Play("Down");
-        notification_board.SetActive(false);
-        isActive_window = !isActive_window;
+        if (isActive_window)
+        {
+            buy_window.GetComponent<Animation>().Play("Down");
+            notification_board.SetActive(false);
+            isActive_window = !isActive_window;
+        }
     }
     public void LoadData()
     {
@@ -230,11 +301,11 @@ public class Shop : MonoBehaviour
                 ActiveLinesPL[f].SetActive(true);
             }
         }
-        for (int e = 0; e < ActiveLineSK.Length; e++)
+        for (int e = 0; e < ActiveLinesSK.Length; e++)
         {
             if (LangSystem.cnfg.current_skin == itm.skins_list[e].ToString())
             {
-                ActiveLineSK[e].SetActive(true);
+                ActiveLinesSK[e].SetActive(true);
             }
         }
     }
@@ -306,8 +377,8 @@ public class Shop : MonoBehaviour
 public class ItemList {
     public string[] bgs_list = new string[11];
     public int[] bgs_prices = new int[11];
-    public string[] platforms_list = new string[3];
-    public int[] platforms_prices = new int[3];
+    public string[] platforms_list = new string[6];
+    public int[] platforms_prices = new int[6];
     public string[] skins_list = new string[8];
     public int[] skins_prices = new int[8];
 

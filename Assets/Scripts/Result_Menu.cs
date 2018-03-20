@@ -55,7 +55,7 @@ public class Result_Menu : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     void CalcFragments() {
-        float temp = Mathf.Round(((float)(points_script._points)) / 6 * 1.2f);
+        float temp = Mathf.Round(((float)(points_script._points)) / 6 * 1.2f); //20%
         bal_points = (int)temp;
         fragment.text = "+ " + bal_points.ToString();
         BalanceSystem.gb.game_balance += bal_points;
@@ -64,7 +64,7 @@ public class Result_Menu : MonoBehaviour {
     }
     void CalcExp()
     {
-        ls._current_exp += (((float)(points_script._points)) / 8) ;
+        ls._current_exp += (((float)(points_script._points)) / 25) ;
         ls.IncreaseLevel();
         LangSystem.cnfg.current_exp = ls._current_exp;
         ls.SaveExpLv();

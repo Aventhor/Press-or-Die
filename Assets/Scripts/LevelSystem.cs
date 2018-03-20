@@ -42,7 +42,7 @@ public class LevelSystem : MonoBehaviour {
     }
 
 	void Start () {
-        if ((SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Menu")) || (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main")))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Main"))
         {
             CheckExpLv();
         }

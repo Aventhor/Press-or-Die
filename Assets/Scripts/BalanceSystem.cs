@@ -13,6 +13,12 @@ public class BalanceSystem : MonoBehaviour
     public static GameBalance gb = new GameBalance();
     [SerializeField] private Text bal_text;
 
+    private int balance;
+    public int _balance
+    {
+        get { return balance; }
+        set { if (gb.game_balance < 100000) this.balance = value; }
+    }
 
     void Awake()
     {
@@ -37,7 +43,8 @@ public class BalanceSystem : MonoBehaviour
     {
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Shop"))
         {
-            bal_text.text = gb.game_balance.ToString();
+            _balance = gb.game_balance;
+            bal_text.text = _balance.ToString();
         }
     }
 #if UNITY_ANDROID && !UNITY_EDITOR

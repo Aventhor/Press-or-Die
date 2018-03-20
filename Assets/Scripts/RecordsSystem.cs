@@ -34,15 +34,15 @@ public class RecordsSystem : MonoBehaviour {
         path = Path.Combine(Application.persistentDataPath, "Config.json");
         File.WriteAllText(path, JsonUtility.ToJson(LangSystem.cnfg));
     }
-    public void ShowText()
+    public void ShowRecord()
     {
         if(!isActive)
         {
-            your_record.SetActive(true);
+            your_record.GetComponent<Animation>().Play("rBoardon");
         }
         else
         {
-            your_record.SetActive(false);
+            your_record.GetComponent<Animation>().Play("rBoardoff");
         }
         isActive = !isActive;
     }

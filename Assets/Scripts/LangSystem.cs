@@ -104,7 +104,7 @@ public void ChangeLanguage()
 [Serializable]
 public class Lang {
     public string[] loc_menu = new string[4];
-    public string[] loc_shop = new string[8];
+    public string[] loc_shop = new string[9];
     public string[] loc_main = new string[6];
 }
 [Serializable]
@@ -118,6 +118,6 @@ public class Config
     public string current_skin = "skin_default";
     public int record;
     public int[] avaliable_bgs = new int[11] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public int[] avaliable_platforms = new int[3] { 1, 0, 0 };
+    public int[] avaliable_platforms = new int[6] { 1, 0, 0, 0, 0, 0 };
     public int[] avaliable_skins = new int[8] { 1, 0, 0, 0, 0, 0, 0, 0 };
 }
